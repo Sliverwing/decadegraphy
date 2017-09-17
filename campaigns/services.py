@@ -70,6 +70,7 @@ def commit_created_at_timestamp_in_db(applicant, calendar_event):
     applicant.google_calendar_event_created_at = calendar_event['created']
     applicant.save()
 
+
 def populate_event_for_submitting(applicant):
     """Returns a dict of to be submitted event.
     """
@@ -86,7 +87,9 @@ def populate_event_for_submitting(applicant):
     }
     return event
 
+
 _PHOTOGRAPH_EVENT_LOCK_KEY_PREFIX = '_photograph_event_lock_'
+
 
 def process_photograph_event(applicant, calendar_service, redis):
     """Processes the potential photograph event.
@@ -107,6 +110,7 @@ def process_photograph_event(applicant, calendar_service, redis):
             event = populate_event_for_submitting(applicant)
             result = submit_photograph_event_to_calendar(calendar_service, event)
             commit_created_at_timestamp_in_db(applicant, result)
+
 
 def process_potential_photograph_events():
     """Iterates over the potential events and enqueue them.
